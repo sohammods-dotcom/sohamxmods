@@ -1,0 +1,44 @@
+// Version: 1.0.0
+type AppId__1026383491 = Nat;
+type AppId__795506006 = AppId__1026383491;
+type App__499577072 =
+  {
+    apkBlob : ExternalBlob__246066408;
+    createdAt : Timestamp__364205147;
+    description : Text;
+    downloadCount : Nat;
+    iconBlob : ExternalBlob__246066408;
+    id : AppId__795506006;
+    name : Text;
+    updatedAt : Timestamp__364205147;
+    version : Text
+  };
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type ExternalBlob__246066408 = Blob;
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type Map__158565046<K, V> = Map__297112838<K, V>;
+type Map__297112838<K, V> =
+  {var root : Node__46230540<K, V>; var size : Nat__490723111};
+type Map__605269027<K, V> = Map__158565046<K, V>;
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type Timestamp__301639476 = Int;
+type Timestamp__364205147 = Timestamp__301639476;
+type UserRole__1054455867 = {#admin; #guest; #user};
+actor {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__605269027<Principal, UserRole__1054455867>
+    };
+  stable appStore :
+    {
+      apps : Map__605269027<AppId__795506006, App__499577072>;
+      var nextId : Nat
+    }
+};

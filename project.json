@@ -1,0 +1,25 @@
+{
+  "overview": "SohamxMods is a premium app download platform — a mini Play Store where the admin uploads APK files with icons and metadata, and users can instantly browse, search, and download apps. Features a sleek dark gradient UI with glassmorphism card design.",
+  "features": [
+    "Admin login with password protection",
+    "APK and icon file uploads with secure storage",
+    "Dynamic public app catalog with instant updates",
+    "Search and filter apps by name or description",
+    "App detail pages with full metadata",
+    "Download counter that increments on each download",
+    "Edit and delete apps from the admin dashboard",
+    "Dark gradient background with glassmorphism card effects",
+    "Legal disclaimer on homepage",
+    "Responsive mobile-first layout"
+  ],
+  "category": "productivity",
+  "tags": [
+    "app-store",
+    "apk",
+    "download-platform",
+    "admin-dashboard",
+    "glassmorphism",
+    "dark-theme"
+  ],
+  "last_updated": "2026-04-18T02:45:08.158Z"
+}

@@ -1,0 +1,73 @@
+type _ImmutableObjectStorageRefillResult = 
+ record {
+   success: opt bool;
+   topped_up_amount: opt nat;
+ };
+type _ImmutableObjectStorageRefillInformation = record {
+                                                  proposed_top_up_amount:
+                                                   opt nat;};
+type _ImmutableObjectStorageCreateCertificateResult = 
+ record {
+   blob_hash: text;
+   method: text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type UpdateAppArgs = 
+ record {
+   apkBlob: ExternalBlob;
+   description: text;
+   iconBlob: ExternalBlob;
+   id: AppId;
+   name: text;
+   version: text;
+ };
+type Timestamp = int;
+type ExternalBlob = blob;
+type CreateAppArgs = 
+ record {
+   apkBlob: ExternalBlob;
+   description: text;
+   iconBlob: ExternalBlob;
+   name: text;
+   version: text;
+ };
+type AppId = nat;
+type App = 
+ record {
+   apkBlob: ExternalBlob;
+   createdAt: Timestamp;
+   description: text;
+   downloadCount: nat;
+   iconBlob: ExternalBlob;
+   id: AppId;
+   name: text;
+   updatedAt: Timestamp;
+   version: text;
+ };
+service : {
+  _immutableObjectStorageBlobsAreLive: (hashes: vec blob) -> (vec bool) query;
+  _immutableObjectStorageBlobsToDelete: () -> (vec blob) query;
+  _immutableObjectStorageConfirmBlobDeletion: (blobs: vec blob) -> ();
+  _immutableObjectStorageCreateCertificate: (blobHash: text) ->
+   (_ImmutableObjectStorageCreateCertificateResult);
+  _immutableObjectStorageRefillCashier: (refillInformation:
+   opt _ImmutableObjectStorageRefillInformation) ->
+   (_ImmutableObjectStorageRefillResult);
+  _immutableObjectStorageUpdateGatewayPrincipals: () -> ();
+  _initializeAccessControl: () -> ();
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  createApp: (args: CreateAppArgs) -> (App);
+  deleteApp: (id: AppId) -> (bool);
+  getApp: (id: AppId) -> (opt App) query;
+  getCallerUserRole: () -> (UserRole) query;
+  incrementDownload: (id: AppId) -> (bool);
+  isCallerAdmin: () -> (bool) query;
+  listApps: () -> (vec App) query;
+  searchApps: (term: text) -> (vec App) query;
+  updateApp: (args: UpdateAppArgs) -> (opt App);
+}
